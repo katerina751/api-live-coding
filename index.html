@@ -42,11 +42,11 @@
         })
             .then((responseData) => {
                 tasks = responseData.todos;
-                renderTasks();
+                renderApp();
             });
     };
 
-    const renderTasks = () => {
+    const renderApp = () => {
 
         const appEl = document.getElementById('app');
 
@@ -121,7 +121,7 @@
                     .then((responseData) => {
                         // Получили данные и рендерим их в приложении
                         tasks = responseData.todos;
-                        renderTasks();
+                        renderApp();
                     });
 
             });
