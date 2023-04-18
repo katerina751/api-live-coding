@@ -1,4 +1,4 @@
-import { login } from "../api.js";
+import { loginUser } from "../api.js";
 
 export function renderLoginComponent({ appEl, setToken, fetchTodosAndRender }) {
     const appHtml = `    
@@ -10,7 +10,7 @@ export function renderLoginComponent({ appEl, setToken, fetchTodosAndRender }) {
                         <input type="text" id="login-input" class="input" placeholder="Введите логин" />
                         <br/>
                         Пароль:
-                        <input type="text" id="login-input" class="input" placeholder="Введите пароль" />
+                        <input type="password" id="password-input" class="input" placeholder="Введите пароль" />
                     </div>
                     <br />
                     <button class="button" id="login-button">Войти</button>
@@ -20,14 +20,29 @@ export function renderLoginComponent({ appEl, setToken, fetchTodosAndRender }) {
     appEl.innerHTML = appHtml;
 
     document.getElementById('login-button').addEventListener('click', () => {
-        
-        login({
-            login: 'admin',
-            password: 'admin'
-        }).then((user)=>{
+        const login = document.getElementById('login-input').value
+        const password = document.getElementById('password-input').value
+
+        if (!login) {
+            alert('Введите логин')
+            return;
+        }
+
+        if (!password) {
+            alert('Введите пароль')
+            return;
+        }
+
+        loginUser({
+            login: login,
+            password: password,
+        }).then((user) => {
             setToken(`Bearer ${user.user.token}`);
             fetchTodosAndRender();
-        })
+        }).catch((error) => {
+            // TODO: Выводить алерт красиво
+            alert(error.message)
+        });
 
     });
 
