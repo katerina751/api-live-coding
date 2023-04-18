@@ -54,13 +54,12 @@ export function loginUser({ login, password }) {
         method: "POST",
         body: JSON.stringify({
             login,
-            password
+            password,
         }),
-    })
-        .then((response) => {
-            if(response.status===400){
-                throw new Error('Неверный логин или пароль');
-            }
-            return response.json();
-        })
+    }).then((response) => {
+        if (response.status === 400) {
+            throw new Error('Неверный логин или пароль');
+        }
+        return response.json();
+    });
 }

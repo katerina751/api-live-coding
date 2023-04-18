@@ -3,9 +3,9 @@
 //  - Перенести ВСЮ разметку (форму входа) в рендер-функцию
 //  - Сделать форму входа динамической
 //  - Отрефакторить приложение на модули
-//  - api
-//  - Вытащить логин-компонент в отдельный модуль
-//  - Вытащить компонент списка и форму добавления в отдельный модуль
+//      - api
+//      - Вытащить логин-компонент в отдельный модуль
+//      - TODO: Вытащить компонент списка и форму добавления в отдельный модуль
 // 2. Реализовать форму регистрации
 
 import { deleteTodo, getTodo, addTodo } from "./api.js";
@@ -31,10 +31,12 @@ const renderApp = () => {
     const appEl = document.getElementById('app');
 
     if (!token) {
-        renderLoginComponent({ appEl, setToken: (newToken) => {
-            token = newToken;
-        }, 
-        fetchTodosAndRender });
+        renderLoginComponent({
+            appEl, setToken: (newToken) => {
+                token = newToken;
+            },
+            fetchTodosAndRender
+        });
 
         return;
     }
@@ -44,7 +46,7 @@ const renderApp = () => {
             return `
                 <li class="task">
                     <p class="task-text">
-                        ${task.text} (Создал: ${task.user?.name?? "Неизвестно"})
+                        ${task.text} (Создал: ${task.user?.name ?? "Неизвестно"})
                         <button data-id="${task.id}" class="button delete-button">Удалить</button>
                     
                         </p>
