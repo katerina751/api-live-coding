@@ -1,7 +1,7 @@
 import { loginUser, registerUser } from "../api.js";
 
 export function renderLoginComponent({ appEl, setToken, fetchTodosAndRender }) {
-    let isLoginMode = false;
+    let isLoginMode = true;
 
     const renderForm = () => {
         const appHtml = `    
